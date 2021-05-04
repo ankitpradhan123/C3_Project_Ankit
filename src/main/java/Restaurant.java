@@ -72,16 +72,35 @@ public class Restaurant {
 //    Calculate sum total price of the selected items
 
     int calculateSum = 0;
+    List<Item> selectedItems = new ArrayList<>();
 
     public Integer selectItem(String itemName) {
 
+        for(Item selectedItem: menu) {
+            if (selectedItem.getName().equals(itemName)) {
+                selectedItems.add(selectedItem);
+                calculateSum = calculateSum + selectedItem.getPrice();
+                return calculateSum;
+            }
+        }
 
-        return calculateSum;
+        return null;
     }
+
+//    Calculate sum total after unchecking the items from the selected list
 
     public Integer removeItem(String itemName){
 
-        return calculateSum;
+        for(Item unselectedItem: selectedItems){
+            if(unselectedItem.getName().equals(itemName)){
+                selectedItems.remove(itemName);
+                calculateSum = calculateSum - unselectedItem.getPrice();
+                return calculateSum;
+            }
+
+        }
+
+        return null;
     }
 
 
