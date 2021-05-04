@@ -4,9 +4,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.swing.*;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import static java.time.LocalTime.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -87,4 +90,49 @@ public class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//    <<<<<<<<<<<<<<<<<<<<<CALCULATE PRICE>>>>>>>>>>>>>>>>>>>>>>>
+
+    @Test
+    public void calculate_sum_total_of_the_items_selected_from_the_menu_and_display_it() {
+        openingTime = parse("10:30:00");
+        closingTime = parse("22:00:00");
+        restaurant = new Restaurant("Amelie's cafe", "Chennai", openingTime, closingTime);
+        restaurant.addToMenu("Chilli Chicken", 200);
+        restaurant.addToMenu(" Veg Fried Rice", 100);
+        restaurant.addToMenu("Egg Fried Rice", 120);
+        restaurant.addToMenu("Chicken Fried Rice", 130);
+
+//        Selecting from the existing menu
+
+        restaurant.selectItem("Chilli Chicken");
+        restaurant.selectItem("Chicken Fried Rice");
+        restaurant.selectItem("Egg Fried Rice");
+        assertEquals(450, restaurant.calculateSum);
+    }
+
+        @Test
+        public void Removing_items_from_the_selected_list_and_then_recalculating_sum(){
+        openingTime = parse("10:30:00");
+        closingTime = parse("22:00:00");
+        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Chilli Chicken", 200);
+        restaurant.addToMenu(" Veg Fried Rice", 100);
+        restaurant.addToMenu("Egg Fried Rice", 120);
+        restaurant.addToMenu("Chicken Fried Rice", 130);
+
+//        Selecting from the existing menu
+
+        restaurant.selectItem("Chilli Chicken");
+        restaurant.selectItem("Chicken Fried Rice");
+        restaurant.selectItem("Egg Fried Rice");
+
+//        Removing from the selected List
+
+        restaurant.removeItem("Chilli Chicken");
+        assertEquals(250, restaurant.calculateSum);
+    }
+
+
+
 }

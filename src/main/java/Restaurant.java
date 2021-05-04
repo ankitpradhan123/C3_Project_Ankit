@@ -11,6 +11,9 @@ public class Restaurant {
     public LocalTime closingTime;
     private List<Item> menu = new ArrayList<Item>();
 
+
+
+
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
         this.location = location;
@@ -65,6 +68,23 @@ public class Restaurant {
                 +"Menu:"+"\n"+getMenu());
 
     }
+
+//    Calculate sum total price of the selected items
+
+    int calculateSum = 0;
+
+    public Integer selectItem(String itemName) {
+
+
+        return calculateSum;
+    }
+
+    public Integer removeItem(String itemName){
+
+        return calculateSum;
+    }
+
+
 
     public String getName() {
         return name;
